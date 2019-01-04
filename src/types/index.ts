@@ -4,7 +4,10 @@ export {
   varVar
 } from "./var";
 export {
-  id
+  id,
+  num,
+  str,
+  bool
 } from "./primitives";
 export {
   call
@@ -14,3 +17,6 @@ export {
   importNamed,
   exportDefault
 } from "./module";
+export {
+  asStatement
+} from "./statement";

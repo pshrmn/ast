@@ -2,7 +2,8 @@ import {
   importDeclaration,
   importSpecifier,
   importDefaultSpecifier,
-  exportDefaultDeclaration
+  exportDefaultDeclaration,
+  exportNamedDeclaration
 } from "@babel/types";
 
 import { id, str } from "./primitives";
@@ -14,17 +15,13 @@ import {
   Expression
 } from "@babel/types";
 
-// import { ${name} } from "${src}";
-export function importNamed(name: string, src: string) {
+export function importNamed(names: Array<string>, src: string) {
   return importDeclaration(
-    [
-      importSpecifier(id(name), id(name))
-    ],
+    names.map(name => importSpecifier(id(name), id(name))),
     str(src)
   );
 }
 
-// import ${name} from "${src}";
 export function importDefault(name: string, src: string) {
   return importDeclaration(
     [
@@ -34,7 +31,6 @@ export function importDefault(name: string, src: string) {
   );
 }
 
-// export ${id};
 export function exportDefault(
   id: FunctionDeclaration | TSDeclareFunction | ClassDeclaration | Expression
 ) {

@@ -8,7 +8,6 @@ import {
   CallExpression
 } from "@babel/types";
 
-// ${call}(${args})
 export function call(
   id: string,
   args: Array<Expression>
