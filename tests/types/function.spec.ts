@@ -1,4 +1,6 @@
 import "jest";
+import dedent from "dedent";
+
 import { stringify, types } from "../../src";
 
 describe("call", () => {
@@ -14,5 +16,29 @@ describe("call", () => {
       types.call("fn", [types.str("hi")])
     );
     expect(stringify([value])).toBe(`fn("hi");`);
+  });
+});
+
+describe("func", () => {
+  it("returns a function node", () => {
+    const value = types.func("test", [], [
+      types.constVar("x", types.num(1)),
+      types.returnValue(types.id("x"))
+    ])
+    expect(stringify([value])).toBe(dedent`
+      function test() {
+        const x = 1;
+        return x;
+      }
+    `);
+  });
+});
+
+describe("returnValue", () => {
+  it("returns return statement", () => {
+    const value = types.returnValue(
+      types.str("hi!")
+    );
+    expect(stringify([value])).toBe(`return "hi!";`);
   });
 });

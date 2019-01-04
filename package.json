@@ -28,6 +28,9 @@
     "@types/babel__generator": "^7.0.1"
   },
   "devDependencies": {
+    "@types/dedent": "^0.7.0",
+    "@types/jest": "^23.3.11",
+    "dedent": "^0.7.0",
     "jest": "^23.6.0",
     "rimraf": "^2.6.3",
     "rollup": "^1.0.1",

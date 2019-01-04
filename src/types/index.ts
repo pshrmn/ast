@@ -10,7 +10,9 @@ export {
   bool
 } from "./primitives";
 export {
-  call
+  call,
+  func,
+  returnValue
 } from "./function";
 export {
   importDefault,
