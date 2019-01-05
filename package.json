@@ -3,9 +3,19 @@
   "version": "0.1.0",
   "description": "Generate JS modules from ASTs",
   "main": "dist/ast.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "dist",
+    "types",
+    "LICENSE",
+    "*.md"
+  ],
+  "sideEffects": false,
   "scripts": {
     "prebuild": "rimraf dist && rimraf types",
     "build": "rollup -c",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test",
     "test": "jest"
   },
   "repository": {
