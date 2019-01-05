@@ -45,6 +45,24 @@ describe("infer", () => {
     `);
   });
 
+  it("returns undefined when given undefined value", () => {
+    const value = types.asStatement(
+      types.infer(undefined)
+    );
+    expect(stringify([value])).toBe(dedent`
+      undefined;
+    `);
+  });
+
+  it("returns null when given null value", () => {
+    const value = types.asStatement(
+      types.infer(null)
+    );
+    expect(stringify([value])).toBe(dedent`
+      null;
+    `);
+  });
+
   it("works recursively", () => {
     const value = types.asStatement(
       types.infer({ a: [1, 2, { b: "B" }] })

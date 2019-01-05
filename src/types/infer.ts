@@ -1,3 +1,7 @@
+import {
+  nullLiteral
+} from "@babel/types";
+
 import { id, str, num, bool } from "./primitives";
 import { array } from "./array";
 import { object, objProp } from "./object";
@@ -10,7 +14,7 @@ export interface InferableObject {
   [key: string]: Inferable
 }
 export interface InferableArray extends Array<Inferable> {}
-export type Inferable = string | number | boolean | InferableObject | InferableArray;
+export type Inferable = string | number | boolean | undefined | null | InferableObject | InferableArray;
 
 export function infer(value: Inferable): Expression {
   switch (typeof value) {
@@ -20,8 +24,12 @@ export function infer(value: Inferable): Expression {
       return num(value);
     case "boolean":
       return bool(value);
+    case "undefined":
+      return id("undefined");
     case "object":
-      if (Array.isArray(value)) {
+      if (value === null) {
+        return nullLiteral();
+      } else if (Array.isArray(value)) {
         return array(
           value.map((i: Inferable) => infer(i))
         );
