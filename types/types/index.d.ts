@@ -6,3 +6,4 @@ export { asStatement } from "./statement";
 export { object, objProp, objMethod, objSpread } from "./object";
 export { array } from "./array";
 export { infer } from "./infer";
+export { comment, multiLineComment, slashComment } from "./comment";

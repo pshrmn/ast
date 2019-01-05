@@ -34,3 +34,8 @@ export {
 export {
   infer
 } from "./infer";
+export {
+  comment,
+  multiLineComment,
+  slashComment
+} from "./comment";
