@@ -23,7 +23,7 @@ describe("func", () => {
   it("returns a function node", () => {
     const value = types.func("test", [], [
       types.constVar("x", types.num(1)),
-      types.returnValue(types.id("x"))
+      types.returns(types.id("x"))
     ])
     expect(stringify([value])).toBe(dedent`
       function test() {
@@ -34,9 +34,9 @@ describe("func", () => {
   });
 });
 
-describe("returnValue", () => {
+describe("returns", () => {
   it("returns return statement", () => {
-    const value = types.returnValue(
+    const value = types.returns(
       types.str("hi!")
     );
     expect(stringify([value])).toBe(`return "hi!";`);

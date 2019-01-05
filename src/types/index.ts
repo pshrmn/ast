@@ -12,7 +12,7 @@ export {
 export {
   call,
   func,
-  returnValue
+  returns
 } from "./function";
 export {
   importDefault,

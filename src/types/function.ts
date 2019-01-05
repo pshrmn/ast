@@ -38,8 +38,4 @@ export function func(
   )
 }
 
-export function returnValue(
-  arg: Expression
-) {
-  return returnStatement(arg);
-}
+export const returns = returnStatement;
