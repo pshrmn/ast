@@ -28,3 +28,9 @@ export {
   objMethod,
   objSpread
 } from "./object";
+export {
+  array
+} from "./array";
+export {
+  infer
+} from "./infer";
