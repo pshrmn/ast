@@ -22,3 +22,9 @@ export {
 export {
   asStatement
 } from "./statement";
+export {
+  object,
+  objProp,
+  objMethod,
+  objSpread
+} from "./object";
