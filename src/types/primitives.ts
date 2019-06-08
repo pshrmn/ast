@@ -5,18 +5,18 @@ import {
   booleanLiteral
 } from "@babel/types";
 
-export function id(name: string) {
+export function ID(name: string) {
   return identifier(name);
 }
 
-export function num(value: number) {
+export function NUMBER(value: number) {
   return numericLiteral(value);
 }
 
-export function str(value: string) {
+export function STRING(value: string) {
   return stringLiteral(value);
 }
 
-export function bool(value: boolean){
+export function BOOLEAN(value: boolean){
   return booleanLiteral(value);
 }

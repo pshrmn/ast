@@ -1,10 +1,10 @@
 import "jest";
 import { stringify, types } from "../../src";
 
-describe("asStatement", () => {
+describe("AS_STATEMENT", () => {
   it("returns expression wrapped as a statement", () => {
-    const value = types.asStatement(
-      types.call("fn", [])
+    const value = types.AS_STATEMENT(
+      types.CALL("fn", [])
     );
     expect(stringify([value])).toBe("fn();");
   });

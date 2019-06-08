@@ -3,12 +3,12 @@ import dedent from "dedent";
 
 import { stringify, types } from "../../src";
 
-describe("comment", () => {
+describe("COMMENT", () => {
   describe("leading", () => {
     it("attaches a comment before the node", () => {
-      const value = types.comment(
-        types.asStatement(
-          types.call("fn", [])
+      const value = types.COMMENT(
+        types.AS_STATEMENT(
+          types.CALL("fn", [])
         ),
         "this is a comment",
         "leading"
@@ -23,9 +23,9 @@ describe("comment", () => {
 
   describe("trailing", () => {
     it("attaches a comment before the node", () => {
-      const value = types.comment(
-        types.asStatement(
-          types.call("fn", [])
+      const value = types.COMMENT(
+        types.AS_STATEMENT(
+          types.CALL("fn", [])
         ),
         "this is a comment",
         "trailing"
@@ -39,12 +39,12 @@ describe("comment", () => {
   });
 });
 
-describe("multiLineComment", () => {
+describe("MULTI_LINE_COMMENT", () => {
   describe("leading", () => {
     it("attaches a comment before the node", () => {
-      const value = types.multiLineComment(
-        types.asStatement(
-          types.call("fn", [])
+      const value = types.MULTI_LINE_COMMENT(
+        types.AS_STATEMENT(
+          types.CALL("fn", [])
         ),
         ["one", "two"],
         "leading"
@@ -60,11 +60,11 @@ describe("multiLineComment", () => {
     });
   });
 
-  describe("leading", () => {
-    it("attaches a comment before the node", () => {
-      const value = types.multiLineComment(
-        types.asStatement(
-          types.call("fn", [])
+  describe("trailing", () => {
+    it("attaches a comment after the node", () => {
+      const value = types.MULTI_LINE_COMMENT(
+        types.AS_STATEMENT(
+          types.CALL("fn", [])
         ),
         ["one", "two"],
         "trailing"
@@ -81,12 +81,12 @@ describe("multiLineComment", () => {
   });
 });
 
-describe("slashComment", () => {
+describe("SLASH_COMMENT", () => {
   describe("leading", () => {
     it("attaches a comment before the node", () => {
-      const value = types.slashComment(
-        types.asStatement(
-          types.call("fn", [])
+      const value = types.SLASH_COMMENT(
+        types.AS_STATEMENT(
+          types.CALL("fn", [])
         ),
         "this is a comment",
         "leading"
@@ -101,9 +101,9 @@ describe("slashComment", () => {
 
   describe("trailing", () => {
     it("attaches a comment before the node", () => {
-      const value = types.slashComment(
-        types.asStatement(
-          types.call("fn", [])
+      const value = types.SLASH_COMMENT(
+        types.AS_STATEMENT(
+          types.CALL("fn", [])
         ),
         "this is a comment",
         "trailing"

@@ -1,41 +1,41 @@
 export {
-  constVar,
-  letVar,
-  varVar
+  CONST,
+  LET,
+  VAR
 } from "./var";
 export {
-  id,
-  num,
-  str,
-  bool
+  ID,
+  NUMBER,
+  STRING,
+  BOOLEAN
 } from "./primitives";
 export {
-  call,
-  func,
-  returns
+  CALL,
+  FUNCTION,
+  RETURN
 } from "./function";
 export {
-  importDefault,
-  importNamed,
-  exportDefault
+  IMPORT_DEFAULT,
+  IMPORT_NAMED,
+  EXPORT_DEFAULT
 } from "./module";
 export {
-  asStatement
+  AS_STATEMENT
 } from "./statement";
 export {
-  object,
-  objProp,
-  objMethod,
-  objSpread
+  OBJECT,
+  OBJECT_PROP,
+  OBJECT_METHOD,
+  SPREAD_OBJECT
 } from "./object";
 export {
-  array
+  ARRAY
 } from "./array";
 export {
-  infer
+  INFER
 } from "./infer";
 export {
-  comment,
-  multiLineComment,
-  slashComment
+  COMMENT,
+  MULTI_LINE_COMMENT,
+  SLASH_COMMENT
 } from "./comment";

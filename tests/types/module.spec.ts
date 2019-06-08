@@ -2,24 +2,24 @@ import "jest";
 
 import { stringify, types } from "../../src";
 
-describe("importDefault", () => {
+describe("IMPORT_DEFAULT", () => {
   it("returns default import string", () => {
-    const value = types.importDefault("thing", "somewhere")
+    const value = types.IMPORT_DEFAULT("thing", "somewhere")
     expect(stringify([value])).toBe(`import thing from "somewhere";`);
   });
 });
 
-describe("importNamed", () => {
+describe("IMPORT_NAMED", () => {
   it("returns named import string", () => {
-    const value = types.importNamed(["thing"], "somewhere")
+    const value = types.IMPORT_NAMED(["thing"], "somewhere")
     expect(stringify([value])).toBe(`import { thing } from "somewhere";`);
   });
 });
 
 
-describe("exportDefault", () => {
+describe("EXPORT_DEFAULT", () => {
   it("returns default export string", () => {
-    const value = types.exportDefault(types.id("thing"))
+    const value = types.EXPORT_DEFAULT(types.ID("thing"))
     expect(stringify([value])).toBe(`export default thing;`);
   });
 });
