@@ -7,26 +7,26 @@ import {
   Expression
 } from "@babel/types";
 
-import { id } from "./primitives";
+import { ID } from "./primitives";
 
 function genericVar(type: "const" | "let" | "var", name: string, init: Expression) {
   return variableDeclaration(
     type,
     [variableDeclarator(
-      id(name),
+      ID(name),
       init
     )]
   );
 }
 
-export function constVar(name: string, init: Expression) {
+export function CONST(name: string, init: Expression) {
   return genericVar("const", name, init);
 }
 
-export function letVar(name: string, init: Expression) {
+export function LET(name: string, init: Expression) {
   return genericVar("let", name, init);
 }
 
-export function varVar(name: string, init: Expression) {
+export function VAR(name: string, init: Expression) {
   return genericVar("var", name, init);
 }

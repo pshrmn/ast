@@ -13,29 +13,29 @@ import {
 } from "@babel/types";
 
 import {
-  id
+  ID
 } from "./primitives";
 
-export function call(
+export function CALL(
   name: string,
   args: Array<Expression>
 ): CallExpression {
   return callExpression(
-    id(name),
+    ID(name),
     args
   );
 }
 
-export function func(
+export function FUNCTION(
   name: string,
   params: Array<LVal>,
   body: Array<Statement>
 ) {
   return functionDeclaration(
-    id(name),
+    ID(name),
     params,
     blockStatement(body)
   )
 }
 
-export const returns = returnStatement;
+export const RETURN = returnStatement;

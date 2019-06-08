@@ -2,9 +2,9 @@ import {
   nullLiteral
 } from "@babel/types";
 
-import { id, str, num, bool } from "./primitives";
-import { array } from "./array";
-import { object, objProp } from "./object";
+import { ID, STRING, NUMBER, BOOLEAN } from "./primitives";
+import { ARRAY } from "./array";
+import { OBJECT, OBJECT_PROP } from "./object";
 
 import {
   Expression
@@ -16,33 +16,33 @@ export interface InferableObject {
 export interface InferableArray extends Array<Inferable> {}
 export type Inferable = string | number | boolean | undefined | null | InferableObject | InferableArray;
 
-export function infer(value: Inferable): Expression {
+export function INFER(value: Inferable): Expression {
   switch (typeof value) {
     case "string":
-      return str(value);
+      return STRING(value);
     case "number":
-      return num(value);
+      return NUMBER(value);
     case "boolean":
-      return bool(value);
+      return BOOLEAN(value);
     case "undefined":
-      return id("undefined");
+      return ID("undefined");
     case "object":
       if (value === null) {
         return nullLiteral();
       } else if (Array.isArray(value)) {
-        return array(
-          value.map((i: Inferable) => infer(i))
+        return ARRAY(
+          value.map((i: Inferable) => INFER(i))
         );
       } else {
-        return object(
+        return OBJECT(
           Object.keys(value)
             .map(
-              p => objProp(id(p), infer(value[p])
+              p => OBJECT_PROP(ID(p), INFER(value[p])
             )
         ));
       }
     case "function":
-      throw new Error(`infer does not work with functions`);
+      throw new Error(`INFER does not work with functions`);
     default:
       throw new Error(`cannot handle type: ${typeof value}`);
   }

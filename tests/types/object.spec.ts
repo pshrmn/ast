@@ -5,10 +5,10 @@ import { stringify, types } from "../../src";
 
 describe("object", () => {
   it("returns an objectExpression node", () => {
-    const value = types.asStatement(types.object([
-      types.objProp(types.id("x"), types.str("y"))
+    const value = types.AS_STATEMENT(types.OBJECT([
+      types.OBJECT_PROP(types.ID("x"), types.STRING("y"))
     ]));
-    // asStatement wraps in parentheses
+    // AS_STATEMENT wraps in parentheses
     expect(stringify([value])).toBe(dedent`
       ({
         x: "y"
@@ -17,12 +17,12 @@ describe("object", () => {
   });
 
   it("works with multiple properties", () => {
-    const value = types.asStatement(types.object([
-      types.objProp(types.id("x"), types.str("X")),
-      types.objProp(types.id("y"), types.str("Y")),
-      types.objMethod("method", types.id("z"), [], [] )
+    const value = types.AS_STATEMENT(types.OBJECT([
+      types.OBJECT_PROP(types.ID("x"), types.STRING("X")),
+      types.OBJECT_PROP(types.ID("y"), types.STRING("Y")),
+      types.OBJECT_METHOD("method", types.ID("z"), [], [] )
     ]));
-    // asStatement wraps in parentheses, properties get
+    // AS_STATEMENT wraps in parentheses, properties get
     // extra newlines (TODO: look into for custom printer)
     expect(stringify([value])).toBe(dedent`
       ({
@@ -38,10 +38,10 @@ describe("object", () => {
 
 describe("objProp", () => {
   it("returns an objectProperty node with expected value", () => {
-    const value = types.asStatement(types.object([
-      types.objProp(types.id("x"), types.str("y"))
+    const value = types.AS_STATEMENT(types.OBJECT([
+      types.OBJECT_PROP(types.ID("x"), types.STRING("y"))
     ]));
-    // asStatement wraps in parentheses
+    // AS_STATEMENT wraps in parentheses
     expect(stringify([value])).toBe(dedent`
       ({
         x: "y"
@@ -52,22 +52,22 @@ describe("objProp", () => {
 
 describe("objMethod", () => {
   it("returns an objectMethod node with expected value", () => {
-    const value = types.asStatement(types.object([
-      types.objMethod(
+    const value = types.AS_STATEMENT(types.OBJECT([
+      types.OBJECT_METHOD(
         "method",
-        types.id("x"),
-        [types.id("y")],
+        types.ID("x"),
+        [types.ID("y")],
         [
-          types.asStatement(
-            types.call(
+          types.AS_STATEMENT(
+            types.CALL(
               "log",
-              [types.id("y")]
+              [types.ID("y")]
             )
           )
         ]
       )
     ]));
-    // asStatement wraps in parentheses, objectMethod gets trailing
+    // AS_STATEMENT wraps in parentheses, objectMethod gets trailing
     // newline
     expect(stringify([value])).toBe(dedent`
       ({
@@ -80,11 +80,11 @@ describe("objMethod", () => {
   });
 });
 
-describe("objSpread", () => {
-  const value = types.asStatement(types.object([
-    types.objSpread(types.id("x"))
+describe("SPREAD_OBJECT", () => {
+  const value = types.AS_STATEMENT(types.OBJECT([
+    types.SPREAD_OBJECT(types.ID("x"))
   ]));
-  // asStatement wraps in parentheses, objSpread doesn't
+  // AS_STATEMENT wraps in parentheses, SPREAD_OBJECT doesn't
   // get newline
   expect(stringify([value])).toBe(dedent`
     ({ ...x

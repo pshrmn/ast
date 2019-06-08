@@ -6,6 +6,6 @@ import {
   Expression
 } from "@babel/types";
 
-export function asStatement(e: Expression) {
+export function AS_STATEMENT(e: Expression) {
   return expressionStatement(e);
 }

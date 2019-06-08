@@ -5,15 +5,15 @@ import { stringify, types } from "../../src";
 
 describe("call", () => {
   it("returns function being called", () => {
-    const value = types.asStatement(
-      types.call("fn", [])
+    const value = types.AS_STATEMENT(
+      types.CALL("fn", [])
     );
     expect(stringify([value])).toBe("fn();");
   });
 
   it("passes arguments to function call", () => {
-    const value = types.asStatement(
-      types.call("fn", [types.str("hi")])
+    const value = types.AS_STATEMENT(
+      types.CALL("fn", [types.STRING("hi")])
     );
     expect(stringify([value])).toBe(`fn("hi");`);
   });
@@ -21,9 +21,9 @@ describe("call", () => {
 
 describe("func", () => {
   it("returns a function node", () => {
-    const value = types.func("test", [], [
-      types.constVar("x", types.num(1)),
-      types.returns(types.id("x"))
+    const value = types.FUNCTION("test", [], [
+      types.CONST("x", types.NUMBER(1)),
+      types.RETURN(types.ID("x"))
     ])
     expect(stringify([value])).toBe(dedent`
       function test() {
@@ -36,8 +36,8 @@ describe("func", () => {
 
 describe("returns", () => {
   it("returns return statement", () => {
-    const value = types.returns(
-      types.str("hi!")
+    const value = types.RETURN(
+      types.STRING("hi!")
     );
     expect(stringify([value])).toBe(`return "hi!";`);
   });

@@ -6,7 +6,7 @@ import {
   exportNamedDeclaration
 } from "@babel/types";
 
-import { id, str } from "./primitives";
+import { ID, STRING } from "./primitives";
 
 import {
   FunctionDeclaration,
@@ -15,23 +15,23 @@ import {
   Expression
 } from "@babel/types";
 
-export function importNamed(names: Array<string>, src: string) {
+export function IMPORT_NAMED(names: Array<string>, src: string) {
   return importDeclaration(
-    names.map(name => importSpecifier(id(name), id(name))),
-    str(src)
+    names.map(name => importSpecifier(ID(name), ID(name))),
+    STRING(src)
   );
 }
 
-export function importDefault(name: string, src: string) {
+export function IMPORT_DEFAULT(name: string, src: string) {
   return importDeclaration(
     [
-      importDefaultSpecifier(id(name))
+      importDefaultSpecifier(ID(name))
     ],
-    str(src)
+    STRING(src)
   );
 }
 
-export function exportDefault(
+export function EXPORT_DEFAULT(
   id: FunctionDeclaration | TSDeclareFunction | ClassDeclaration | Expression
 ) {
   return exportDefaultDeclaration(id);

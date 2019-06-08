@@ -3,31 +3,31 @@ import dedent from "dedent";
 
 import { stringify, types } from "../../src";
 
-describe("infer", () => {
+describe("INFER", () => {
   it("returns a string node when given a string", () => {
-    const value = types.asStatement(
-      types.infer("test")
+    const value = types.AS_STATEMENT(
+      types.INFER("test")
     );
     expect(stringify([value])).toBe(`"test";`);
   });
 
   it("returns a number node when given a number", () => {
-    const value = types.asStatement(
-      types.infer(3.14)
+    const value = types.AS_STATEMENT(
+      types.INFER(3.14)
     );
     expect(stringify([value])).toBe("3.14;");
   });
 
   it("returns a bool node when given a boolean", () => {
-    const value = types.asStatement(
-      types.infer(false)
+    const value = types.AS_STATEMENT(
+      types.INFER(false)
     );
     expect(stringify([value])).toBe("false;");
   });
 
   it("returns an object node when given an object", () => {
-    const value = types.asStatement(
-      types.infer({ a: "A" })
+    const value = types.AS_STATEMENT(
+      types.INFER({ a: "A" })
     );
     expect(stringify([value])).toBe(dedent`
       ({
@@ -37,8 +37,8 @@ describe("infer", () => {
   });
 
   it("returns an array node when given an array", () => {
-    const value = types.asStatement(
-      types.infer([1, 2, "3"])
+    const value = types.AS_STATEMENT(
+      types.INFER([1, 2, "3"])
     );
     expect(stringify([value])).toBe(dedent`
       [1, 2, "3"];
@@ -46,8 +46,8 @@ describe("infer", () => {
   });
 
   it("returns undefined when given undefined value", () => {
-    const value = types.asStatement(
-      types.infer(undefined)
+    const value = types.AS_STATEMENT(
+      types.INFER(undefined)
     );
     expect(stringify([value])).toBe(dedent`
       undefined;
@@ -55,8 +55,8 @@ describe("infer", () => {
   });
 
   it("returns null when given null value", () => {
-    const value = types.asStatement(
-      types.infer(null)
+    const value = types.AS_STATEMENT(
+      types.INFER(null)
     );
     expect(stringify([value])).toBe(dedent`
       null;
@@ -64,8 +64,8 @@ describe("infer", () => {
   });
 
   it("works recursively", () => {
-    const value = types.asStatement(
-      types.infer({ a: [1, 2, { b: "B" }] })
+    const value = types.AS_STATEMENT(
+      types.INFER({ a: [1, 2, { b: "B" }] })
     );
     expect(stringify([value])).toBe(dedent`
       ({
@@ -78,10 +78,10 @@ describe("infer", () => {
 
   it("throws an error when given a function", () => {
     expect(() => {
-      const value = types.infer(
+      const value = types.INFER(
         // @ts-ignore
         function x() {}
       )
-    }).toThrow("infer does not work with functions");
+    }).toThrow("INFER does not work with functions");
   });
 });

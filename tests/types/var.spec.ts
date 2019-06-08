@@ -2,23 +2,23 @@ import "jest";
 
 import { stringify, types } from "../../src";
 
-describe("constVar", () => {
+describe("CONST", () => {
   it("returns const variable declaration", () => {
-    const value = types.constVar("x", types.call("fn", []));
+    const value = types.CONST("x", types.CALL("fn", []));
     expect(stringify([value])).toBe("const x = fn();");
   });
 });
 
-describe("letVar", () => {
+describe("LET", () => {
   it("returns let variable declaration", () => {
-    const value = types.letVar("x", types.call("fn", []));
+    const value = types.LET("x", types.CALL("fn", []));
     expect(stringify([value])).toBe("let x = fn();");
   });
 });
 
-describe("varVar", () => {
+describe("VAR", () => {
   it("returns const variable declaration", () => {
-    const value = types.varVar("x", types.call("fn", []));
+    const value = types.VAR("x", types.CALL("fn", []));
     expect(stringify([value])).toBe("var x = fn();");
   });
 });

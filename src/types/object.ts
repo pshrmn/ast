@@ -19,15 +19,15 @@ import {
   Statement
 } from "@babel/types";
 
-export function object(properties: Array<ObjectProperty | ObjectMethod | SpreadElement>) {
+export function OBJECT(properties: Array<ObjectProperty | ObjectMethod | SpreadElement>) {
   return objectExpression(properties);
 }
 
-export function objProp(key: Identifier, value: Expression | PatternLike) {
+export function OBJECT_PROP(key: Identifier, value: Expression | PatternLike) {
   return objectProperty(key, value);
 }
 
-export function objMethod(
+export function OBJECT_METHOD(
   kind: "method" | "get" | "set",
   key: Identifier,
   params: Array<LVal>,
@@ -36,4 +36,4 @@ export function objMethod(
   return objectMethod(kind, key, params, blockStatement(body));
 }
 
-export const objSpread = spreadElement;
+export const SPREAD_OBJECT = spreadElement;

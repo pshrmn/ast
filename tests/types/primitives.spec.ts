@@ -2,37 +2,37 @@ import "jest";
 
 import { stringify, types } from "../../src";
 
-describe("id", () => {
+describe("ID", () => {
   it("returns an identifier node", () => {
-    const value = types.asStatement(
-      types.id("hi")
+    const value = types.AS_STATEMENT(
+      types.ID("hi")
     );
     expect(stringify([value])).toBe("hi;");
   });
 });
 
-describe("num", () => {
+describe("NUMBER", () => {
   it("returns a number node", () => {
-    const value = types.asStatement(
-      types.num(5)
+    const value = types.AS_STATEMENT(
+      types.NUMBER(5)
     );
     expect(stringify([value])).toBe("5;");
   });
 });
 
-describe("str", () => {
+describe("STRING", () => {
   it("returns a string node", () => {
-    const value = types.asStatement(
-      types.str("hi")
+    const value = types.AS_STATEMENT(
+      types.STRING("hi")
     );
     expect(stringify([value])).toBe(`"hi";`);
   });
 });
 
-describe("bool", () => {
-  it("returns a bool node", () => {
-    const value = types.asStatement(
-      types.bool(false)
+describe("BOOLEAN", () => {
+  it("returns a boolean node", () => {
+    const value = types.AS_STATEMENT(
+      types.BOOLEAN(false)
     );
     expect(stringify([value])).toBe("false;");
   });
