@@ -1,2 +1,2 @@
 import { arrayExpression } from "@babel/types";
-export declare const array: typeof arrayExpression;
+export declare const ARRAY: typeof arrayExpression;

@@ -1,2 +1,2 @@
 import { Expression } from "@babel/types";
-export declare function asStatement(e: Expression): import("@babel/types").ExpressionStatement;
+export declare function AS_STATEMENT(e: Expression): import("@babel/types").ExpressionStatement;

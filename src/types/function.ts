@@ -8,7 +8,10 @@ import {
 import {
   Expression,
   CallExpression,
-  LVal,
+  Identifier,
+  Pattern,
+  RestElement,
+  TSParameterProperty,
   Statement
 } from "@babel/types";
 
@@ -28,7 +31,7 @@ export function CALL(
 
 export function FUNCTION(
   name: string,
-  params: Array<LVal>,
+  params: Array<Identifier | Pattern | RestElement | TSParameterProperty>,
   body: Array<Statement>
 ) {
   return functionDeclaration(

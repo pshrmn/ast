@@ -1,5 +1,3 @@
-import * as t from "@babel/types";
-
 import {
   objectExpression,
   objectProperty,
@@ -15,7 +13,9 @@ import {
   Identifier,
   Expression,
   PatternLike,
-  LVal,
+  Pattern,
+  RestElement,
+  TSParameterProperty,
   Statement
 } from "@babel/types";
 
@@ -30,7 +30,7 @@ export function OBJECT_PROP(key: Identifier, value: Expression | PatternLike) {
 export function OBJECT_METHOD(
   kind: "method" | "get" | "set",
   key: Identifier,
-  params: Array<LVal>,
+  params: Array<Identifier | Pattern | RestElement | TSParameterProperty>,
   body: Array<Statement>
 ) {
   return objectMethod(kind, key, params, blockStatement(body));
