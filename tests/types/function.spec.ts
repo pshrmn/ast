@@ -8,14 +8,18 @@ describe("CALL", () => {
     const value = types.AS_STATEMENT(
       types.CALL("fn", [])
     );
-    expect(stringify([value])).toBe("fn();");
+    expect(
+      stringify`${value}`
+    ).toBe("fn();");
   });
 
   it("passes arguments to function call", () => {
     const value = types.AS_STATEMENT(
       types.CALL("fn", [types.STRING("hi")])
     );
-    expect(stringify([value])).toBe(`fn("hi");`);
+    expect(
+      stringify`${value}`
+    ).toBe(`fn("hi");`);
   });
 });
 
@@ -25,7 +29,9 @@ describe("FUNCTION", () => {
       types.CONST("x", types.NUMBER(1)),
       types.RETURN(types.ID("x"))
     ]);
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       function test() {
         const x = 1;
         return x;
@@ -42,7 +48,9 @@ describe("ARROW_FUNCTION", () => {
         types.RETURN(types.ID("x"))
       ])
     );
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       () => {
         const x = 1;
         return x;
@@ -54,7 +62,9 @@ describe("ARROW_FUNCTION", () => {
     const value = types.AS_STATEMENT(
       types.ARROW_FUNCTION([], types.NUMBER(1))
     );
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       () => 1;
     `);
   });
@@ -66,6 +76,8 @@ describe("returns", () => {
     const value = types.RETURN(
       types.STRING("hi!")
     );
-    expect(stringify([value])).toBe(`return "hi!";`);
+    expect(
+      stringify`${value}`
+    ).toBe(`return "hi!";`);
   });
 });

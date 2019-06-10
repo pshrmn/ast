@@ -7,7 +7,9 @@ describe("ID", () => {
     const value = types.AS_STATEMENT(
       types.ID("hi")
     );
-    expect(stringify([value])).toBe("hi;");
+    expect(
+      stringify`${value}`
+    ).toBe("hi;");
   });
 });
 
@@ -16,7 +18,9 @@ describe("NUMBER", () => {
     const value = types.AS_STATEMENT(
       types.NUMBER(5)
     );
-    expect(stringify([value])).toBe("5;");
+    expect(
+      stringify`${value}`
+    ).toBe("5;");
   });
 });
 
@@ -25,7 +29,9 @@ describe("STRING", () => {
     const value = types.AS_STATEMENT(
       types.STRING("hi")
     );
-    expect(stringify([value])).toBe(`"hi";`);
+    expect(
+      stringify`${value}`
+    ).toBe(`"hi";`);
   });
 });
 
@@ -34,6 +40,8 @@ describe("BOOLEAN", () => {
     const value = types.AS_STATEMENT(
       types.BOOLEAN(false)
     );
-    expect(stringify([value])).toBe("false;");
+    expect(
+      stringify`${value}`
+    ).toBe("false;");
   });
 });

@@ -9,10 +9,13 @@ describe("object", () => {
       types.OBJECT_PROP(types.ID("x"), types.STRING("y"))
     ]));
     // AS_STATEMENT wraps in parentheses
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       ({
         x: "y"
       });
+
     `);
   });
 
@@ -24,7 +27,9 @@ describe("object", () => {
     ]));
     // AS_STATEMENT wraps in parentheses, properties get
     // extra newlines (TODO: look into for custom printer)
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       ({
         x: "X",
         y: "Y",
@@ -42,7 +47,9 @@ describe("objProp", () => {
       types.OBJECT_PROP(types.ID("x"), types.STRING("y"))
     ]));
     // AS_STATEMENT wraps in parentheses
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       ({
         x: "y"
       });
@@ -69,7 +76,9 @@ describe("objMethod", () => {
     ]));
     // AS_STATEMENT wraps in parentheses, objectMethod gets trailing
     // newline
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       ({
         x(y) {
           log(y);
@@ -86,7 +95,9 @@ describe("SPREAD_OBJECT", () => {
   ]));
   // AS_STATEMENT wraps in parentheses, SPREAD_OBJECT doesn't
   // get newline
-  expect(stringify([value])).toBe(dedent`
+  expect(
+    stringify`${value}`
+  ).toBe(dedent`
     ({ ...x
     });
   `);

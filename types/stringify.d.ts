@@ -1,2 +1,2 @@
 import * as t from "@babel/types";
-export default function stringify(nodes: Array<t.Statement>, newlines?: number): string;
+export default function stringify(strings: TemplateStringsArray, ...keys: Array<t.Statement>): string;

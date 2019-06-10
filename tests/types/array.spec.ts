@@ -11,6 +11,8 @@ describe("ARRAY", () => {
         types.NUMBER(3)
       ])
     );
-    expect(stringify([value])).toBe("[1, 2, 3];");
+    expect(
+      stringify`${value}`
+    ).toBe("[1, 2, 3];");
   });
 });
