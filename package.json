@@ -1,6 +1,6 @@
 {
   "name": "@posh/ast",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Generate JS modules from ASTs",
   "main": "dist/ast.js",
   "types": "types/index.d.ts",
