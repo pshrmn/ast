@@ -3,7 +3,7 @@ import dedent from "dedent";
 
 import { stringify, types } from "../../src";
 
-describe("object", () => {
+describe("OBJECT", () => {
   it("returns an objectExpression node", () => {
     const value = types.AS_STATEMENT(types.OBJECT([
       types.OBJECT_PROP(types.ID("x"), types.STRING("y"))
@@ -41,7 +41,7 @@ describe("object", () => {
   });
 });
 
-describe("objProp", () => {
+describe("OBJECT_PROP", () => {
   it("returns an objectProperty node with expected value", () => {
     const value = types.AS_STATEMENT(types.OBJECT([
       types.OBJECT_PROP(types.ID("x"), types.STRING("y"))
@@ -57,7 +57,7 @@ describe("objProp", () => {
   });
 });
 
-describe("objMethod", () => {
+describe("OBJECT_METHOD", () => {
   it("returns an objectMethod node with expected value", () => {
     const value = types.AS_STATEMENT(types.OBJECT([
       types.OBJECT_METHOD(
@@ -90,15 +90,44 @@ describe("objMethod", () => {
 });
 
 describe("SPREAD_OBJECT", () => {
-  const value = types.AS_STATEMENT(types.OBJECT([
-    types.SPREAD_OBJECT(types.ID("x"))
-  ]));
-  // AS_STATEMENT wraps in parentheses, SPREAD_OBJECT doesn't
-  // get newline
-  expect(
-    stringify`${value}`
-  ).toBe(dedent`
-    ({ ...x
-    });
-  `);
+  it("spread the object", () => {
+    const value = types.AS_STATEMENT(types.OBJECT([
+      types.SPREAD_OBJECT(types.ID("x"))
+    ]));
+    // AS_STATEMENT wraps in parentheses, SPREAD_OBJECT doesn't
+    // get newline
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
+      ({ ...x
+      });
+    `);
+  });
+});
+
+describe("MEMBER", () => {
+  it("does not compute by default", () => {
+    const value = types.AS_STATEMENT(types.MEMBER(
+      types.ID("x"),
+      types.ID("y")
+    ));
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
+      x.y;
+    `);
+  });
+
+  it("computes when compute=true", () => {
+    const value = types.AS_STATEMENT(types.MEMBER(
+      types.ID("x"),
+      types.STRING("y"),
+      true
+    ));
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
+      x["y"];
+    `);
+  });
 });

@@ -3,7 +3,8 @@ import {
   objectProperty,
   objectMethod,
   blockStatement,
-  spreadElement
+  spreadElement,
+  memberExpression
 } from "@babel/types";
 
 import {
@@ -37,3 +38,4 @@ export function OBJECT_METHOD(
 }
 
 export const SPREAD_OBJECT = spreadElement;
+export const MEMBER = memberExpression;
