@@ -1,5 +1,6 @@
 import "jest";
 import dedent from "dedent";
+import * as BABEL_TYPES from "@babel/types";
 
 import { stringify, types } from "../../src";
 
@@ -20,6 +21,41 @@ describe("CALL", () => {
     expect(
       stringify`${value}`
     ).toBe(`fn("hi");`);
+  });
+
+  describe("callee", () => {
+    it("works with a string", () => {
+      const value = types.AS_STATEMENT(
+        types.CALL("fn", [])
+      );
+      expect(
+        stringify`${value}`
+      ).toBe("fn();");
+    });
+
+    it("works with an identifier", () => {
+      const value = types.AS_STATEMENT(
+        types.CALL(types.ID("id"), [])
+      );
+      expect(
+        stringify`${value}`
+      ).toBe("id();");
+    });
+
+    it("works with a member expression", () => {
+      const value = types.AS_STATEMENT(
+        types.CALL(
+          BABEL_TYPES.memberExpression(
+            types.ID("one"),
+            types.ID("two")
+          ),
+          []
+        )
+      );
+      expect(
+        stringify`${value}`
+      ).toBe("one.two();");
+    });
   });
 });
 

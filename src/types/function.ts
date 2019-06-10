@@ -21,11 +21,11 @@ import {
 } from "./primitives";
 
 export function CALL(
-  name: string,
+  name: string | Expression,
   args: Array<Expression>
 ): CallExpression {
   return callExpression(
-    ID(name),
+    typeof name === "string" ? ID(name) : name,
     args
   );
 }
