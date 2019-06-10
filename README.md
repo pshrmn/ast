@@ -16,8 +16,8 @@ npm install @posh/ast
 import { stringify, types } from "@posh/ast";
 
 function createModule() {
-  const myVar = types.constVar("myVar", types.str("hi!"));
-  const exportVar = types.exportDefault(types.id("myVar"));
+  const myVar = types.CONST("myVar", types.STRING("hi!"));
+  const exportVar = types.EXPORT_DEFAULT(types.ID("myVar"));
 
   const code = "";
   code += stringify([myVar, exportVar], 1);
@@ -28,26 +28,26 @@ function createModule() {
 }
 
 function createComponent() {
-  const importReact = types.importDefault("React", "react");
-  const MyComponent = types.func(
+  const importReact = types.IMPORT_DEFAULT("React", "react");
+  const MyComponent = types.FUNCTION(
     "MyComponent",
-    [types.id("props")],
+    [types.ID("props")],
     [
-      types.returnValue(types.str("test"))
+      types.RETURN(types.STRING("test"))
     ]
   );
-  const exportComponent = types.exportDefault("MyComponent");
+  const exportComponent = types.EXPORT_DEFAULT("MyComponent");
   const code = "";
   code += stringify([importReact], 2);
   code += stringify([MyComponent]), 2);
   code += stringify([exportComponent], 1);
   /*
    * import React from "react"
-   * 
+   *
    * function MyComponent(props) {
    *   return "test";
    * }
-   * 
+   *
    * export default MyComponent;
    */
 }
