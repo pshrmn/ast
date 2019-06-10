@@ -14,7 +14,9 @@ describe("COMMENT", () => {
         "leading"
       );
 
-      expect(stringify([value])).toBe(dedent`
+      expect(
+        stringify`${value}`
+      ).toBe(dedent`
         /* this is a comment */
         fn();
       `);
@@ -31,7 +33,9 @@ describe("COMMENT", () => {
         "trailing"
       );
 
-      expect(stringify([value])).toBe(dedent`
+      expect(
+        stringify`${value}`
+      ).toBe(dedent`
         fn();
         /* this is a comment */
       `);
@@ -50,7 +54,9 @@ describe("MULTI_LINE_COMMENT", () => {
         "leading"
       );
 
-      expect(stringify([value])).toBe(dedent`
+      expect(
+        stringify`${value}`
+      ).toBe(dedent`
         /*
          * one
          * two
@@ -70,7 +76,9 @@ describe("MULTI_LINE_COMMENT", () => {
         "trailing"
       );
 
-      expect(stringify([value])).toBe(dedent`
+      expect(
+        stringify`${value}`
+      ).toBe(dedent`
         fn();
         /*
          * one
@@ -92,7 +100,9 @@ describe("SLASH_COMMENT", () => {
         "leading"
       );
 
-      expect(stringify([value])).toBe(dedent`
+      expect(
+        stringify`${value}`
+      ).toBe(dedent`
         // this is a comment
         fn();
       `);
@@ -109,7 +119,9 @@ describe("SLASH_COMMENT", () => {
         "trailing"
       );
 
-      expect(stringify([value])).toBe(dedent`
+      expect(
+        stringify`${value}`
+      ).toBe(dedent`
         fn(); // this is a comment
       `);
     });

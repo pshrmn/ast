@@ -8,28 +8,36 @@ describe("INFER", () => {
     const value = types.AS_STATEMENT(
       types.INFER("test")
     );
-    expect(stringify([value])).toBe(`"test";`);
+    expect(
+      stringify`${value}`
+    ).toBe(`"test";`);
   });
 
   it("returns a number node when given a number", () => {
     const value = types.AS_STATEMENT(
       types.INFER(3.14)
     );
-    expect(stringify([value])).toBe("3.14;");
+    expect(
+      stringify`${value}`
+    ).toBe("3.14;");
   });
 
   it("returns a bool node when given a boolean", () => {
     const value = types.AS_STATEMENT(
       types.INFER(false)
     );
-    expect(stringify([value])).toBe("false;");
+    expect(
+      stringify`${value}`
+    ).toBe("false;");
   });
 
   it("returns an object node when given an object", () => {
     const value = types.AS_STATEMENT(
       types.INFER({ a: "A" })
     );
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       ({
         a: "A"
       });
@@ -40,7 +48,9 @@ describe("INFER", () => {
     const value = types.AS_STATEMENT(
       types.INFER([1, 2, "3"])
     );
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       [1, 2, "3"];
     `);
   });
@@ -49,7 +59,9 @@ describe("INFER", () => {
     const value = types.AS_STATEMENT(
       types.INFER(undefined)
     );
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       undefined;
     `);
   });
@@ -58,7 +70,9 @@ describe("INFER", () => {
     const value = types.AS_STATEMENT(
       types.INFER(null)
     );
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       null;
     `);
   });
@@ -67,7 +81,9 @@ describe("INFER", () => {
     const value = types.AS_STATEMENT(
       types.INFER({ a: [1, 2, { b: "B" }] })
     );
-    expect(stringify([value])).toBe(dedent`
+    expect(
+      stringify`${value}`
+    ).toBe(dedent`
       ({
         a: [1, 2, {
           b: "B"

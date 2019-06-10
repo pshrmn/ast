@@ -6,6 +6,8 @@ describe("AS_STATEMENT", () => {
     const value = types.AS_STATEMENT(
       types.CALL("fn", [])
     );
-    expect(stringify([value])).toBe("fn();");
+    expect(
+      stringify`${value}`
+    ).toBe("fn();");
   });
 });

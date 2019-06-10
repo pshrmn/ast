@@ -19,8 +19,10 @@ function createModule() {
   const myVar = types.CONST("myVar", types.STRING("hi!"));
   const exportVar = types.EXPORT_DEFAULT(types.ID("myVar"));
 
-  const code = "";
-  code += stringify([myVar, exportVar], 1);
+  const code = stringify`
+${myVar}
+${exportVar}
+`;
   /*
    * const myVar = "hi!";
    * export default myVar;
@@ -37,10 +39,13 @@ function createComponent() {
     ]
   );
   const exportComponent = types.EXPORT_DEFAULT("MyComponent");
-  const code = "";
-  code += stringify([importReact], 2);
-  code += stringify([MyComponent]), 2);
-  code += stringify([exportComponent], 1);
+  const code = stringify`
+${importReact}
+
+${MyComponent}
+
+${exportComponent}
+`;
   /*
    * import React from "react"
    *
