@@ -1,6 +1,7 @@
 import {
   callExpression,
   functionDeclaration,
+  arrowFunctionExpression,
   blockStatement,
   returnStatement
 } from "@babel/types";
@@ -39,6 +40,16 @@ export function FUNCTION(
     params,
     blockStatement(body)
   )
+}
+
+export function ARROW_FUNCTION(
+  params: Array<Identifier | Pattern | RestElement | TSParameterProperty>,
+  body: Expression | Array<Statement>
+) {
+  return arrowFunctionExpression(
+    params,
+    Array.isArray(body) ? blockStatement(body) : body
+  );
 }
 
 export const RETURN = returnStatement;

@@ -3,7 +3,7 @@ import dedent from "dedent";
 
 import { stringify, types } from "../../src";
 
-describe("call", () => {
+describe("CALL", () => {
   it("returns function being called", () => {
     const value = types.AS_STATEMENT(
       types.CALL("fn", [])
@@ -19,12 +19,12 @@ describe("call", () => {
   });
 });
 
-describe("func", () => {
+describe("FUNCTION", () => {
   it("returns a function node", () => {
     const value = types.FUNCTION("test", [], [
       types.CONST("x", types.NUMBER(1)),
       types.RETURN(types.ID("x"))
-    ])
+    ]);
     expect(stringify([value])).toBe(dedent`
       function test() {
         const x = 1;
@@ -33,6 +33,33 @@ describe("func", () => {
     `);
   });
 });
+
+describe("ARROW_FUNCTION", () => {
+  it("works with an array of statements", () => {
+    const value = types.AS_STATEMENT(
+      types.ARROW_FUNCTION([], [
+        types.CONST("x", types.NUMBER(1)),
+        types.RETURN(types.ID("x"))
+      ])
+    );
+    expect(stringify([value])).toBe(dedent`
+      () => {
+        const x = 1;
+        return x;
+      };
+    `);
+  });
+
+  it("works with a single expression", () => {
+    const value = types.AS_STATEMENT(
+      types.ARROW_FUNCTION([], types.NUMBER(1))
+    );
+    expect(stringify([value])).toBe(dedent`
+      () => 1;
+    `);
+  });
+});
+
 
 describe("returns", () => {
   it("returns return statement", () => {

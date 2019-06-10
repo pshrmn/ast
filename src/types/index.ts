@@ -12,6 +12,7 @@ export {
 export {
   CALL,
   FUNCTION,
+  ARROW_FUNCTION,
   RETURN
 } from "./function";
 export {
