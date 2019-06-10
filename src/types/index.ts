@@ -27,7 +27,8 @@ export {
   OBJECT,
   OBJECT_PROP,
   OBJECT_METHOD,
-  SPREAD_OBJECT
+  SPREAD_OBJECT,
+  MEMBER
 } from "./object";
 export {
   ARRAY
