@@ -6,3 +6,6 @@ export {
 export {
   CommentLocation
 } from "./comment";
+export {
+  Operator
+} from "./expressions";
