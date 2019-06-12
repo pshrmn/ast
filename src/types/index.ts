@@ -21,6 +21,9 @@ export {
   EXPORT_DEFAULT
 } from "./module";
 export {
+  NEW
+} from "./expressions";
+export {
   AS_STATEMENT
 } from "./statement";
 export {
