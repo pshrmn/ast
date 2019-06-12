@@ -21,7 +21,8 @@ export {
   EXPORT_DEFAULT
 } from "./module";
 export {
-  NEW
+  NEW,
+  BINARY
 } from "./expressions";
 export {
   AS_STATEMENT
