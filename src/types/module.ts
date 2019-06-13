@@ -2,37 +2,43 @@ import {
   importDeclaration,
   importSpecifier,
   importDefaultSpecifier,
-  exportDefaultDeclaration,
-  exportNamedDeclaration
+  exportDefaultDeclaration
 } from "@babel/types";
 
 import { ID, STRING } from "./primitives";
 
 import {
   FunctionDeclaration,
-  TSDeclareFunction,
   ClassDeclaration,
   Expression
 } from "@babel/types";
 
-export function IMPORT_NAMED(names: Array<string>, src: string) {
+export interface ImportNamedProps {
+  names: Array<string>;
+  source: string;
+}
+
+export interface ImportDefaultProps {
+  name: string;
+  source: string;
+}
+
+export function IMPORT_NAMED(props: ImportNamedProps,) {
   return importDeclaration(
-    names.map(name => importSpecifier(ID(name), ID(name))),
-    STRING(src)
+    props.names.map(name => importSpecifier(ID(name), ID(name))),
+    STRING(props.source)
   );
 }
 
-export function IMPORT_DEFAULT(name: string, src: string) {
+export function IMPORT_DEFAULT(props: ImportDefaultProps) {
   return importDeclaration(
-    [
-      importDefaultSpecifier(ID(name))
-    ],
-    STRING(src)
+    [importDefaultSpecifier(ID(props.name))],
+    STRING(props.source)
   );
 }
 
 export function EXPORT_DEFAULT(
-  id: FunctionDeclaration | TSDeclareFunction | ClassDeclaration | Expression
+  declaration: FunctionDeclaration | ClassDeclaration | Expression
 ) {
-  return exportDefaultDeclaration(id);
+  return exportDefaultDeclaration(declaration);
 }

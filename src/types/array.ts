@@ -2,4 +2,11 @@ import {
   arrayExpression
 } from "@babel/types";
 
-export const ARRAY = arrayExpression;
+import {
+  Expression,
+  SpreadElement
+} from "@babel/types";
+
+export function ARRAY(elements: Array<null | Expression | SpreadElement>) {
+  return arrayExpression(elements);
+};

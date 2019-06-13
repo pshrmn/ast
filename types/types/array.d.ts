@@ -1,2 +1,2 @@
-import { arrayExpression } from "@babel/types";
-export declare const ARRAY: typeof arrayExpression;
+import { Expression, SpreadElement } from "@babel/types";
+export declare function ARRAY(elements: Array<null | Expression | SpreadElement>): import("@babel/types").ArrayExpression;

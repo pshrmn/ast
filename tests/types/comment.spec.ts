@@ -4,14 +4,52 @@ import dedent from "dedent";
 import { stringify, types } from "../../src";
 
 describe("COMMENT", () => {
-  describe("leading", () => {
-    it("attaches a comment before the node", () => {
-      const value = types.COMMENT(
-        types.AS_STATEMENT(
-          types.CALL("fn", [])
+  describe("where", () => {
+    it("attaches a comment before the node when where=leading", () => {
+      const value = types.COMMENT({
+        node: types.AS_STATEMENT(
+          types.CALL({ callee: "fn" })
         ),
-        "this is a comment",
-        "leading"
+        comment: "this is a comment",
+        where: "leading"
+      });
+
+      expect(
+        stringify`${value}`
+      ).toBe(dedent`
+        /* this is a comment */
+        fn();
+      `);
+    });
+
+    it("attaches a comment after the node when where=trailing", () => {
+      const value = types.COMMENT({
+        node: types.AS_STATEMENT(
+          types.CALL({ callee: "fn" })
+        ),
+        comment: "this is a comment",
+        where: "trailing"
+      }
+      );
+
+      expect(
+        stringify`${value}`
+      ).toBe(dedent`
+        fn();
+        /* this is a comment */
+      `);
+    });
+  });
+
+  describe("line", () => {
+    it("is a block comment when omitted", () => {
+      const value = types.COMMENT({
+        node: types.AS_STATEMENT(
+          types.CALL({ callee: "fn" })
+        ),
+        comment: "this is a comment",
+        where: "leading"
+      }
       );
 
       expect(
@@ -21,23 +59,40 @@ describe("COMMENT", () => {
         fn();
       `);
     });
-  });
 
-  describe("trailing", () => {
-    it("attaches a comment before the node", () => {
-      const value = types.COMMENT(
-        types.AS_STATEMENT(
-          types.CALL("fn", [])
+    it("is a block comment when false", () => {
+      const value = types.COMMENT({
+        node: types.AS_STATEMENT(
+          types.CALL({ callee: "fn" })
         ),
-        "this is a comment",
-        "trailing"
+        line: false,
+        comment: "this is a comment",
+        where: "leading"
+      }
       );
 
       expect(
         stringify`${value}`
       ).toBe(dedent`
-        fn();
         /* this is a comment */
+        fn();
+      `);
+    });
+
+    it("is a slash comment when true", () => {
+      const value = types.COMMENT({
+        node: types.AS_STATEMENT(
+          types.CALL({ callee: "fn" })
+        ),
+        line: true,
+        comment: "this is a comment",
+        where: "trailing"
+      });
+
+      expect(
+        stringify`${value}`
+      ).toBe(dedent`
+        fn(); // this is a comment
       `);
     });
   });
@@ -46,13 +101,13 @@ describe("COMMENT", () => {
 describe("MULTI_LINE_COMMENT", () => {
   describe("leading", () => {
     it("attaches a comment before the node", () => {
-      const value = types.MULTI_LINE_COMMENT(
-        types.AS_STATEMENT(
-          types.CALL("fn", [])
+      const value = types.MULTI_LINE_COMMENT({
+        node: types.AS_STATEMENT(
+          types.CALL({ callee: "fn" })
         ),
-        ["one", "two"],
-        "leading"
-      );
+        comments: ["one", "two"],
+        where: "leading"
+      });
 
       expect(
         stringify`${value}`
@@ -68,13 +123,13 @@ describe("MULTI_LINE_COMMENT", () => {
 
   describe("trailing", () => {
     it("attaches a comment after the node", () => {
-      const value = types.MULTI_LINE_COMMENT(
-        types.AS_STATEMENT(
-          types.CALL("fn", [])
+      const value = types.MULTI_LINE_COMMENT({
+        node: types.AS_STATEMENT(
+          types.CALL({ callee: "fn" })
         ),
-        ["one", "two"],
-        "trailing"
-      );
+        comments: ["one", "two"],
+        where: "trailing"
+      });
 
       expect(
         stringify`${value}`
@@ -89,41 +144,3 @@ describe("MULTI_LINE_COMMENT", () => {
   });
 });
 
-describe("SLASH_COMMENT", () => {
-  describe("leading", () => {
-    it("attaches a comment before the node", () => {
-      const value = types.SLASH_COMMENT(
-        types.AS_STATEMENT(
-          types.CALL("fn", [])
-        ),
-        "this is a comment",
-        "leading"
-      );
-
-      expect(
-        stringify`${value}`
-      ).toBe(dedent`
-        // this is a comment
-        fn();
-      `);
-    });
-  });
-
-  describe("trailing", () => {
-    it("attaches a comment before the node", () => {
-      const value = types.SLASH_COMMENT(
-        types.AS_STATEMENT(
-          types.CALL("fn", [])
-        ),
-        "this is a comment",
-        "trailing"
-      );
-
-      expect(
-        stringify`${value}`
-      ).toBe(dedent`
-        fn(); // this is a comment
-      `);
-    });
-  });
-});

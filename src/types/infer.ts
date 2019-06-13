@@ -30,16 +30,17 @@ export function INFER(value: Inferable): Expression {
       if (value === null) {
         return nullLiteral();
       } else if (Array.isArray(value)) {
-        return ARRAY(
-          value.map((i: Inferable) => INFER(i))
-        );
+        return ARRAY(value.map((i: Inferable) => INFER(i)));
       } else {
         return OBJECT(
           Object.keys(value)
             .map(
-              p => OBJECT_PROP(ID(p), INFER(value[p])
+              p => OBJECT_PROP({
+                key: ID(p),
+                value: INFER(value[p])
+              })
             )
-        ));
+        );
       }
     case "function":
       throw new Error(`INFER does not work with functions`);

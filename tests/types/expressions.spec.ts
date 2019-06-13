@@ -5,7 +5,9 @@ import { stringify, types } from "../../src";
 describe("NEW", () => {
   it("returns a new expression", () => {
     const value = types.AS_STATEMENT(
-      types.NEW(types.ID("Date"), [])
+      types.NEW({
+        callee: types.ID("Date")
+      })
     );
     expect(
       stringify`${value}`
@@ -16,7 +18,11 @@ describe("NEW", () => {
 describe("BINARY", () => {
   it("returns a binary expression", () => {
     const value = types.AS_STATEMENT(
-      types.BINARY(types.ID("value"), "<", types.NUMBER(7))
+      types.BINARY({
+        left: types.ID("value"),
+        operator: "<",
+        right: types.NUMBER(7)
+      })
     );
     expect(
       stringify`${value}`
@@ -25,11 +31,15 @@ describe("BINARY", () => {
 
   it("correctly chains binary expressions", () => {
     const value = types.AS_STATEMENT(
-      types.BINARY(
-        types.BINARY(types.NUMBER(6), "+", types.NUMBER(7)),
-        "*",
-        types.NUMBER(3)
-      )
+      types.BINARY({
+        left: types.BINARY({
+          left: types.NUMBER(6),
+          operator: "+",
+          right: types.NUMBER(7)
+        }),
+        operator: "*",
+        right: types.NUMBER(3)
+      })
     );
     expect(
       stringify`${value}`

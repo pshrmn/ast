@@ -9,6 +9,11 @@ import {
 
 import { ID } from "./primitives";
 
+export interface VariableProps {
+  name: string;
+  init: Expression
+}
+
 function genericVar(type: "const" | "let" | "var", name: string, init: Expression) {
   return variableDeclaration(
     type,
@@ -19,14 +24,14 @@ function genericVar(type: "const" | "let" | "var", name: string, init: Expressio
   );
 }
 
-export function CONST(name: string, init: Expression) {
-  return genericVar("const", name, init);
+export function CONST(props: VariableProps) {
+  return genericVar("const", props.name, props.init);
 }
 
-export function LET(name: string, init: Expression) {
-  return genericVar("let", name, init);
+export function LET(props: VariableProps) {
+  return genericVar("let", props.name, props.init);
 }
 
-export function VAR(name: string, init: Expression) {
-  return genericVar("var", name, init);
+export function VAR(props: VariableProps) {
+  return genericVar("var", props.name, props.init);
 }

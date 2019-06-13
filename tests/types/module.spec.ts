@@ -4,7 +4,10 @@ import { stringify, types } from "../../src";
 
 describe("IMPORT_DEFAULT", () => {
   it("returns default import string", () => {
-    const value = types.IMPORT_DEFAULT("thing", "somewhere")
+    const value = types.IMPORT_DEFAULT({
+      name: "thing",
+      source: "somewhere"
+    })
     expect(
       stringify`${value}`
     ).toBe(`import thing from "somewhere";`);
@@ -13,7 +16,10 @@ describe("IMPORT_DEFAULT", () => {
 
 describe("IMPORT_NAMED", () => {
   it("returns named import string", () => {
-    const value = types.IMPORT_NAMED(["thing"], "somewhere")
+    const value = types.IMPORT_NAMED({
+      names: ["thing"],
+      source: "somewhere"
+    })
     expect(
       stringify`${value}`
     ).toBe(`import { thing } from "somewhere";`);
