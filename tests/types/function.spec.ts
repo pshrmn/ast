@@ -7,7 +7,9 @@ import { stringify, types } from "../../src";
 describe("CALL", () => {
   it("returns function being called", () => {
     const value = types.AS_STATEMENT(
-      types.CALL("fn", [])
+      types.CALL({
+        callee: "fn"
+      })
     );
     expect(
       stringify`${value}`
@@ -16,7 +18,10 @@ describe("CALL", () => {
 
   it("passes arguments to function call", () => {
     const value = types.AS_STATEMENT(
-      types.CALL("fn", [types.STRING("hi")])
+      types.CALL({
+        callee: "fn",
+        arguments: [types.STRING("hi")]
+      })
     );
     expect(
       stringify`${value}`
@@ -26,7 +31,9 @@ describe("CALL", () => {
   describe("callee", () => {
     it("works with a string", () => {
       const value = types.AS_STATEMENT(
-        types.CALL("fn", [])
+        types.CALL({
+          callee: "fn"
+        })
       );
       expect(
         stringify`${value}`
@@ -35,7 +42,9 @@ describe("CALL", () => {
 
     it("works with an identifier", () => {
       const value = types.AS_STATEMENT(
-        types.CALL(types.ID("id"), [])
+        types.CALL({
+          callee: types.ID("id")
+        })
       );
       expect(
         stringify`${value}`
@@ -44,13 +53,12 @@ describe("CALL", () => {
 
     it("works with a member expression", () => {
       const value = types.AS_STATEMENT(
-        types.CALL(
-          BABEL_TYPES.memberExpression(
-            types.ID("one"),
-            types.ID("two")
-          ),
-          []
-        )
+        types.CALL({
+          callee: types.MEMBER({
+            object:  types.ID("one"),
+            property:  types.ID("two")
+          })
+        })
       );
       expect(
         stringify`${value}`
@@ -61,10 +69,16 @@ describe("CALL", () => {
 
 describe("FUNCTION", () => {
   it("returns a function node", () => {
-    const value = types.FUNCTION("test", [], [
-      types.CONST("x", types.NUMBER(1)),
-      types.RETURN(types.ID("x"))
-    ]);
+    const value = types.FUNCTION({
+      id: "test",
+      body: [
+        types.CONST({
+          name: "x",
+          init: types.NUMBER(1)
+        }),
+        types.RETURN(types.ID("x"))
+      ]
+    });
     expect(
       stringify`${value}`
     ).toBe(dedent`
@@ -79,10 +93,15 @@ describe("FUNCTION", () => {
 describe("ARROW_FUNCTION", () => {
   it("works with an array of statements", () => {
     const value = types.AS_STATEMENT(
-      types.ARROW_FUNCTION([], [
-        types.CONST("x", types.NUMBER(1)),
-        types.RETURN(types.ID("x"))
-      ])
+      types.ARROW_FUNCTION({
+        body: [
+          types.CONST({
+            name: "x",
+            init: types.NUMBER(1)
+          }),
+          types.RETURN(types.ID("x"))
+        ]
+      })
     );
     expect(
       stringify`${value}`
@@ -96,7 +115,9 @@ describe("ARROW_FUNCTION", () => {
 
   it("works with a single expression", () => {
     const value = types.AS_STATEMENT(
-      types.ARROW_FUNCTION([], types.NUMBER(1))
+      types.ARROW_FUNCTION({
+        body: types.NUMBER(1)
+      })
     );
     expect(
       stringify`${value}`

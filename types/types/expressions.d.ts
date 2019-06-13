@@ -1,5 +1,13 @@
-import { newExpression } from "@babel/types";
-import { Expression } from "@babel/types";
+import { Expression, SpreadElement, JSXNamespacedName, ArgumentPlaceholder } from "@babel/types";
+export interface NewProps {
+    callee: Expression;
+    arguments?: Array<Expression | SpreadElement | JSXNamespacedName | ArgumentPlaceholder>;
+}
+export interface BinaryProps {
+    operator: Operator;
+    left: Expression;
+    right: Expression;
+}
 export declare type Operator = "+" | "-" | "/" | "%" | "*" | "**" | "&" | "|" | ">>" | ">>>" | "<<" | "^" | "==" | "===" | "!=" | "!==" | "in" | "instanceof" | ">" | "<" | ">=" | "<=";
-export declare const NEW: typeof newExpression;
-export declare function BINARY(left: Expression, operator: Operator, right: Expression): import("@babel/types").BinaryExpression;
+export declare function NEW(props: NewProps): import("@babel/types").NewExpression;
+export declare function BINARY(props: BinaryProps): import("@babel/types").BinaryExpression;

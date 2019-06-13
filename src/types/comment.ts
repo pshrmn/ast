@@ -8,9 +8,36 @@ import {
 
 export type CommentLocation = "leading" | "trailing";
 
-// block comment
-export function COMMENT(node: Node, comment: string, where: CommentLocation) {
-  return addComment(node, where, ` ${comment} `, false);
+export interface CommentProps {
+  node: Node;
+  comment: string;
+  where: CommentLocation;
+  line?: boolean; // true for slash comment, false for block
+}
+
+export interface MultiLineCommentProps {
+  node: Node;
+  comments: Array<string>;
+  where: CommentLocation;
+}
+
+export function COMMENT(props: CommentProps) {
+  return addComment(
+    props.node,
+    props.where,
+    ` ${props.comment} `,
+    props.line
+  );
+}
+
+// slash comment
+export function SLASH_COMMENT(props: CommentProps) {
+  return addComment(
+    props.node,
+    props.where,
+    ` ${props.comment}`,
+    true
+  );
 }
 
 function fmtComments(comments: Array<string>): string {
@@ -18,11 +45,11 @@ function fmtComments(comments: Array<string>): string {
 }
 
 // multi-line block comment
-export function MULTI_LINE_COMMENT(node: Node, comments: Array<string>, where: CommentLocation) {
-  return addComment(node, where, fmtComments(comments));
-}
-
-// slash comment
-export function SLASH_COMMENT(node: Node, comment: string, where: CommentLocation) {
-  return addComment(node, where, ` ${comment}`, true);
+export function MULTI_LINE_COMMENT(props: MultiLineCommentProps) {
+  return addComment(
+    props.node,
+    props.where,
+    fmtComments(props.comments),
+    false
+  );
 }
