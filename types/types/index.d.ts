@@ -1,7 +1,7 @@
 export { CONST, LET, VAR } from "./var";
 export { ID, NUMBER, STRING, BOOLEAN } from "./primitives";
 export { CALL, FUNCTION, ARROW_FUNCTION, RETURN } from "./function";
-export { IMPORT_DEFAULT, IMPORT_NAMED, EXPORT_DEFAULT } from "./module";
+export { IMPORT_DEFAULT, IMPORT_NAMED, EXPORT_DEFAULT, EXPORT_DECLARATION, EXPORT_NAMED, EXPORT_SPECIFIER } from "./module";
 export { NEW, BINARY } from "./expressions";
 export { AS_STATEMENT } from "./statement";
 export { OBJECT, OBJECT_PROP, OBJECT_METHOD, SPREAD_OBJECT, MEMBER } from "./object";

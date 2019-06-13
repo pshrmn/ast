@@ -18,7 +18,10 @@ export {
 export {
   IMPORT_DEFAULT,
   IMPORT_NAMED,
-  EXPORT_DEFAULT
+  EXPORT_DEFAULT,
+  EXPORT_DECLARATION,
+  EXPORT_NAMED,
+  EXPORT_SPECIFIER
 } from "./module";
 export {
   NEW,
