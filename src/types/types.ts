@@ -23,10 +23,8 @@ export {
   ImportDefaultProps
 } from "./module";
 export {
-  ObjectProps,
   ObjectPropertyProps,
   ObjectMethodProps,
-  SpreadObjectProps,
   MemberProps
 } from "./object";
 export {
