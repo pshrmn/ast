@@ -20,7 +20,9 @@ export {
 } from "./infer";
 export {
   ImportNamedProps,
-  ImportDefaultProps
+  ImportDefaultProps,
+  ExportNamedProps,
+  ExportSpecifierProps
 } from "./module";
 export {
   ObjectPropertyProps,

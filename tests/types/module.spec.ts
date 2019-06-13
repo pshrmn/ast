@@ -35,3 +35,36 @@ describe("EXPORT_DEFAULT", () => {
     ).toBe(`export default thing;`);
   });
 });
+
+describe("EXPORT_DECLARATION", () => {
+  it("returns named declaration export string", () => {
+    const value = types.EXPORT_DECLARATION(
+      types.CONST({
+        name: "thing",
+        init: types.NUMBER(6)
+      })
+    );
+    expect(
+      stringify`${value}`
+    ).toBe(`export const thing = 6;`);
+  });
+});
+
+describe("EXPORT_NAMED & EXPORT_SPECIFIER", () => {
+  it("returns named export string", () => {
+    const value = types.EXPORT_NAMED({
+      specifiers: [
+        types.EXPORT_SPECIFIER({
+          local: "x"
+        }),
+        types.EXPORT_SPECIFIER({
+          local: "y",
+          exported: "z"
+        })
+      ]
+    });
+    expect(
+      stringify`${value}`
+    ).toBe(`export { x, y as z };`);
+  });
+});
